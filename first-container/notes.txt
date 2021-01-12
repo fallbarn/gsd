@@ -1,0 +1,50 @@
+git close https://github.com/fallbarn/gsd
+
+cd gsd
+ls -l
+cd first-container
+ls -l
+clear
+docker image build -t falbarn/gsd:first-ctr .
+
+
+
+
+// dockerId: falbarn
+// repos: gsd
+// image: first-ctr
+// all files: . (period)
+
+
+docker login --username falbarn
+Password: efac87bb-1fbe-4009-ac54-26eeaf08cee1
+
+docker image ls
+
+docker image push falbarn/gsd:first-ctr
+
+// removes the image from the local machine - i.e. still resides in the docker hub
+docker image rm falbarn/gsd:first-ctr
+
+docker container run -d --name web -p 8000:8080  \ // worked first time !  -d mean detached from terminal  local port 8000 is mapped to 8080 as specified in app.js
+falbarn/gsd:first-ctr
+
+docker container ls
+
+// Press button at top of Docker-Play to run website.
+
+docker container stop web
+
+docker container ls -a
+
+docker container start web
+
+docker container rm web
+
+
+
+
+
+
+
+
