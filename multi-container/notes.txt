@@ -1,0 +1,39 @@
+git clone https://github.com/fallbarn/gsd
+
+	// What is the Redis image in the docker hub?
+
+docker-compose up  // execute the declarative yaml file
+
+	// Running on http://0.0.0.0:5000 / (Press CTRL+c to quit) * Debuger PIN 273-944-749
+
+    // Used docker-compose to deploy a muti container app - micro services app with two services - deployed from a declarative file to a single Docker host.
+
+docker-compose down
+
+docker swarm init --adverise-addre=192.168.0.20
+
+Ctrl-Insert // to copy
+Shift-Insert // paste
+
+
+
+// Create four more sessions
+
+docker swarm join-token manager
+docker swarm join-token manager
+docker swarm join-token manager
+
+docker node ls // list three docker managers
+
+docker swarm join-token worker
+docker swarm join-token worker
+docker node 
+
+docker node ls // list three docker managers and two workers
+
+docker service create --name web -p 8080:8080 --replicas 3 falbarn/gsd:first-ctr
+
+docker service ls
+
+
+

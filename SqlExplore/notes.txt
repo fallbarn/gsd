@@ -1,0 +1,223 @@
+mkdir mssql
+cd mssql
+touch docker-compose.yml
+
+// sle note: indentation is critical
+version: "3.7"
+services:
+    sql-server-db:
+    container_name: sql-server-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+            - "8080:5000"
+        environment:
+            SA_PASSWORD: "super1-dup@-passworD"
+            ACCEPT_EULA: "Y"
+       
+
+docker pull mcr.microsoft.com/mssql/server
+
+docker-compose ps
+docker-compose up
+
+Creating network "root_default" with the default driver
+Pulling sql-server-db (mcr.microsoft.com/mssql/server:2019-latest)...
+2019-latest: Pulling from mssql/server
+Digest: sha256:e4ed4e9dda5366045f8915ab0feeb0853a3bdf510013686ecc9ce026012a254c
+Status: Downloaded newer image for mcr.microsoft.com/mssql/server:2019-latest
+Creating sql-server-db ... done
+
+docker-compose logs sql-server-db
+
+Attaching to sql-server-db
+sql-server-db    | SQL Server 2019 will run as non-root by default.
+sql-server-db    | This container is running as user mssql.
+sql-server-db    | To learn more visit https://go.microsoft.com/fwlink/?linkid=2099216.
+sql-server-db    | 2021-01-26 12:27:46.03 Server      Setup step is copying system data file 'C:\templatedata\master.mdf' to '/var/opt/mssql/data/master.mdf'.
+2021-01-26 12:27:46.15 Server      Did not find an existing master data file /var/opt/mssql/data/master.mdf, copying the missing default master and other system database files. If you have moved the database location, but not moved the database files, startup may fail. To repair: shutdown SQL Server, move the master database to configured location, and restart.
+2021-01-26 12:27:46.17 Server      Setup step is copying system data file 'C:\templatedata\mastlog.ldf' to '/var/opt/mssql/data/mastlog.ldf'.
+2021-01-26 12:27:46.19 Server      Setup step is copying system data file 'C:\templatedata\model.mdf' to '/var/opt/mssql/data/model.mdf'.
+2021-01-26 12:27:46.21 Server      Setup step is copying system data file 'C:\templatedata\modellog.ldf' to '/var/opt/mssql/data/modellog.ldf'.
+2021-01-26 12:27:46.23 Server      Setup step is copying system data file 'C:\templatedata\msdbdata.mdf' to '/var/opt/mssql/data/msdbdata.mdf'.
+2021-01-26 12:27:46.25 Server      Setup step is copying system data file 'C:\templatedata\msdblog.ldf' to '/var/opt/mssql/data/msdblog.ldf'.
+2021-01-26 12:27:46.26 Server      Setup step is FORCE copying system data file 'C:\templatedata\model_replicatedmaster.mdf' to '/var/opt/mssql/data/model_replicatedmaster.mdf'.
+2021-01-26 12:27:46.28 Server      Setup step is FORCE copying system data file 'C:\templatedata\model_replicatedmaster.ldf' to '/var/opt/mssql/data/model_replicatedmaster.ldf'.
+2021-01-26 12:27:46.29 Server      Setup step is FORCE copying system data file 'C:\templatedata\model_msdbdata.mdf' to '/var/opt/mssql/data/model_msdbdata.mdf'.
+2021-01-26 12:27:46.31 Server      Setup step is FORCE copying system data file 'C:\templatedata\model_msdblog.ldf' to '/var/opt/mssql/data/model_msdblog.ldf'.
+2021-01-26 12:27:46.50 Server      Microsoft SQL Server 2019 (RTM-CU8-GDR) (KB4583459) - 15.0.4083.2 (X64) 
+sql-servNov  2 2020 18:35:09 
+sql-servCopyright (C) 2019 Microsoft Corporation
+sql-servDeveloper Edition (64-bit) on Linux (Ubuntu 18.04.5 LTS) <X64>
+2021-01-26 12:27:46.51 Server      UTC adjustment: 0:00
+2021-01-26 12:27:46.51 Server      (c) Microsoft Corporation.
+2021-01-26 12:27:46.52 Server      All rights reserved.
+2021-01-26 12:27:46.52 Server      Server process ID is 40.
+2021-01-26 12:27:46.52 Server      Logging SQL Server messages in file '/var/opt/mssql/log/errorlog'.
+2021-01-26 12:27:46.53 Server      Registry startup parameters: 
+sql-serv -d /var/opt/mssql/data/master.mdf
+sql-serv -l /var/opt/mssql/data/mastlog.ldf
+sql-serv -e /var/opt/mssql/log/errorlog
+2021-01-26 12:27:46.55 Server      SQL Server detected 1 sockets with 4 cores per socket and 8 logical processors per socket, 8 total logical processors; using 8 logical processors based on SQL Server licensing. This is an informational message; no user action is required.
+2021-01-26 12:27:46.58 Server      SQL Server is starting at normal priority base (=7). This is an informational message only. No user action is required.
+2021-01-26 12:27:46.59 Server      Detected 25740 MB of RAM. This is an informational message; no user action is required.
+2021-01-26 12:27:46.60 Server      Using conventional memory in the memory manager.
+2021-01-26 12:27:46.78 Server      Page exclusion bitmap is enabled.
+2021-01-26 12:27:46.83 Server      Buffer pool extension is not supported on Linux platform.
+2021-01-26 12:27:46.83 Server      Buffer Pool: Allocating 4194304 bytes for 2625648 hashPages.
+2021-01-26 12:27:47.35 Server      Buffer pool extension is already disabled. No action is necessary.
+2021-01-26 12:27:48.49 Server      Successfully initialized the TLS configuration. Allowed TLS protocol versions are ['1.0 1.1 1.2']. Allowed TLS ciphers are ['ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-ECDSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:!DHE-RSA-AES256-GCM-SHA384:!DHE-RSA-AES128-GCM-SHA256:!DHE-RSA-AES256-SHA:!DHE-RSA-AES128-SHA'].
+2021-01-26 12:27:48.55 Server      Query Store settings initialized with enabled = 1, 
+2021-01-26 12:27:48.58 Server      The maximum number of dedicated administrator connections for this instance is '1'
+2021-01-26 12:27:48.60 Server      Node configuration: node 0: CPU mask: 0x00000000000000ff:0 Active CPU mask: 0x00000000000000ff:0. This message provides a description of the NUMA configuration for this computer. This is an informational message only. No user action is required.
+2021-01-26 12:27:48.82 Server      Using dynamic lock allocation.  Initial allocation of 2500 Lock blocks and 5000 Lock Owner blocks per node.  This is an informational message only.  No user action is required.
+2021-01-26 12:27:48.86 Server      In-Memory OLTP initialized on standard machine.
+2021-01-26 12:27:48.94 Server      [INFO] Created Extended Events session 'hkenginexesession'
+2021-01-26 12:27:48.95 Server      Database Instant File Initialization: enabled. For security and performance considerations see the topic 'Database Instant File Initialization' in SQL Server Books Online. This is an informational message only. No user action is required.
+ForceFlush is enabled for this instance. 
+2021-01-26 12:27:48.98 Server      Total Log Writer threads: 2. This is an informational message; no user action is required.
+2021-01-26 12:27:49.01 Server      CLR version v4.0.30319 loaded.
+2021-01-26 12:27:49.02 Server      clflush is selected for pmem flush operation.
+2021-01-26 12:27:49.04 Server      Software Usage Metrics is disabled.
+2021-01-26 12:27:49.08 spid10s     [1]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1.
+2021-01-26 12:27:49.10 spid10s     Starting up database 'master'.
+ForceFlush feature is enabled for log durability.
+2021-01-26 12:27:49.52 spid10s     The tail of the log for database master is being rewritten to match the new sector size of 4096 bytes.  3584 bytes at offset 393728 in file /var/opt/mssql/data/mastlog.ldf will be written.
+2021-01-26 12:27:49.79 spid10s     Converting database 'master' from version 897 to the current version 904.
+2021-01-26 12:27:49.79 spid10s     Database 'master' running the upgrade step from version 897 to version 898.
+2021-01-26 12:27:49.80 spid10s     Database 'master' running the upgrade step from version 898 to version 899.
+2021-01-26 12:27:49.83 spid10s     Database 'master' running the upgrade step from version 899 to version 900.
+2021-01-26 12:27:49.85 Server      Common language runtime (CLR) functionality initialized.
+2021-01-26 12:27:49.87 spid10s     Database 'master' running the upgrade step from version 900 to version 901.
+2021-01-26 12:27:49.88 spid10s     Database 'master' running the upgrade step from version 901 to version 902.
+2021-01-26 12:27:49.92 spid10s     Database 'master' running the upgrade step from version 902 to version 903.
+2021-01-26 12:27:49.93 spid10s     Database 'master' running the upgrade step from version 903 to version 904.
+2021-01-26 12:27:50.28 spid10s     Resource governor reconfiguration succeeded.
+2021-01-26 12:27:50.29 spid10s     SQL Server Audit is starting the audits. This is an informational message. No user action is required.
+2021-01-26 12:27:50.30 spid10s     SQL Server Audit has started the audits. This is an informational message. No user action is required.
+2021-01-26 12:27:50.38 spid10s     SQL Trace ID 1 was started by login "sa".
+2021-01-26 12:27:50.40 spid10s     Server name is 'c5896eb19e32'. This is an informational message only. No user action is required.
+2021-01-26 12:27:50.40 spid29s     Password policy update was successful.
+2021-01-26 12:27:50.48 spid30s     Always On: The availability replica manager is starting. This is an informational message only. No user action is required.
+2021-01-26 12:27:50.48 spid10s     [4]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1.
+2021-01-26 12:27:50.49 spid12s     [32767]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1.
+2021-01-26 12:27:50.55 spid10s     Starting up database 'msdb'.
+2021-01-26 12:27:50.55 spid30s     Always On: The availability replica manager is waiting for the instance of SQL Server to allow client connections. This is an informational message only. No user action is required.
+2021-01-26 12:27:50.59 spid12s     Starting up database 'mssqlsystemresource'.
+2021-01-26 12:27:50.64 spid12s     The resource database build version is 15.00.4083. This is an informational message only. No user action is required.
+2021-01-26 12:27:50.70 spid12s     [3]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1.
+2021-01-26 12:27:50.71 spid12s     Starting up database 'model'.
+2021-01-26 12:27:50.78 spid29s     A self-generated certificate was successfully loaded for encryption.
+2021-01-26 12:27:50.80 spid29s     Server is listening on [ 'any' <ipv6> 1433].
+2021-01-26 12:27:50.80 spid29s     Server is listening on [ 'any' <ipv4> 1433].
+2021-01-26 12:27:50.82 Server      Server is listening on [ ::1 <ipv6> 1434].
+2021-01-26 12:27:50.82 Server      Server is listening on [ 127.0.0.1 <ipv4> 1434].
+2021-01-26 12:27:50.83 Server      Dedicated admin connection support was established for listening locally on port 1434.
+2021-01-26 12:27:50.85 spid29s     Server is listening on [ ::1 <ipv6> 1431].
+2021-01-26 12:27:50.85 spid29s     Server is listening on [ 127.0.0.1 <ipv4> 1431].
+2021-01-26 12:27:50.86 spid29s     SQL Server is now ready for client connections. This is an informational message; no user action is required.
+2021-01-26 12:27:51.07 spid10s     The tail of the log for database msdb is being rewritten to match the new sector size of 4096 bytes.  3072 bytes at offset 50176 in file /var/opt/mssql/data/MSDBLog.ldf will be written.
+2021-01-26 12:27:51.15 spid12s     The tail of the log for database model is being rewritten to match the new sector size of 4096 bytes.  512 bytes at offset 73216 in file /var/opt/mssql/data/modellog.ldf will be written.
+2021-01-26 12:27:51.17 spid10s     Converting database 'msdb' from version 897 to the current version 904.
+2021-01-26 12:27:51.18 spid10s     Database 'msdb' running the upgrade step from version 897 to version 898.
+2021-01-26 12:27:51.20 spid10s     Database 'msdb' running the upgrade step from version 898 to version 899.
+2021-01-26 12:27:51.24 spid12s     Converting database 'model' from version 897 to the current version 904.
+2021-01-26 12:27:51.26 spid12s     Database 'model' running the upgrade step from version 897 to version 898.
+2021-01-26 12:27:51.27 spid10s     Database 'msdb' running the upgrade step from version 899 to version 900.
+2021-01-26 12:27:51.29 spid12s     Database 'model' running the upgrade step from version 898 to version 899.
+2021-01-26 12:27:51.32 spid10s     Database 'msdb' running the upgrade step from version 900 to version 901.
+2021-01-26 12:27:51.35 spid10s     Database 'msdb' running the upgrade step from version 901 to version 902.
+2021-01-26 12:27:51.36 spid12s     Database 'model' running the upgrade step from version 899 to version 900.
+2021-01-26 12:27:51.38 spid12s     Database 'model' running the upgrade step from version 900 to version 901.
+2021-01-26 12:27:51.39 spid12s     Database 'model' running the upgrade step from version 901 to version 902.
+2021-01-26 12:27:51.40 spid12s     Database 'model' running the upgrade step from version 902 to version 903.
+2021-01-26 12:27:51.41 spid12s     Database 'model' running the upgrade step from version 903 to version 904.
+2021-01-26 12:27:51.54 spid12s     Clearing tempdb database.
+2021-01-26 12:27:51.60 spid10s     Error: 46906, Severity: 16, State: 1.
+2021-01-26 12:27:51.60 spid10s     Unable to retrieve registry value 'NodeRole' from Windows registry key 'Software\Microsoft\Microsoft SQL Server\MSSQL\Polybase\Configuration': (null).
+2021-01-26 12:27:52.19 spid12s     [2]. Feature Status: PVS: 0. CTR: 0. ConcurrentPFSUpdate: 1.
+2021-01-26 12:27:52.20 spid12s     Starting up database 'tempdb'.
+2021-01-26 12:27:52.35 spid30s     ERROR: Unable to set system administrator password: Password validation failed. The password does not meet SQL Server password policy requirements because it is not complex enough. The password must be at least 8 characters long and contain characters from three of the following four sets: Uppercase letters, Lowercase letters, Base 10 digits, and Symbols..
+2021-01-26 12:27:52.38 spid30s     An error occurred during server setup. See previous errors for more information.
+2021-01-26 12:27:52.39 spid30s     SQL Trace was stopped due to server shutdown. Trace ID = '1'. This is an informational message only; no user action is required.
+
+$ docker-compose down
+
+Removing sql-server-db ... done
+Removing network root_default
+[node2] (local) root@192.168.0.17 ~
+$ docker-compose ps
+Name   Command   State   Ports
+------------------------------
+[node2] (local) root@192.168.0.17 ~
+$ vim docker-compose.yml
+[node2] (local) root@192.168.0.17 ~
+$ docker-compose ps
+Name   Command   State   Ports
+------------------------------
+[node2] (local) root@192.168.0.17 ~
+$ docker-compose up -d
+Creating network "root_default" with the default driver
+Creating sql-server-db ... done
+[node2] (local) root@192.168.0.17 ~
+$ docker-compose ps
+    Name                   Command               State                Ports              
+-----------------------------------------------------------------------------------------
+sql-server-db   /opt/mssql/bin/permissions ...   Up      1433/tcp, 0.0.0.0:8080->5000/tcp
+[node2] (local) root@192.168.0.17 ~
+
+ docker pull node
+Using default tag: latest
+latest: Pulling from library/node
+2587235a7635: Pull complete 
+953fe5c215cb: Pull complete 
+d4d3f270c7de: Pull complete 
+ed36dafe30e3: Pull complete 
+00e912dd434d: Pull complete 
+dd25ee3ea38e: Pull complete 
+856f8ebc161d: Pull complete 
+2ab9800d7323: Pull complete 
+c57d0532f0ca: Pull complete 
+Digest: sha256:ebf5158e91b303bd93e77537065742c42657aa7ca1714ada7cedee3e2033191f
+Status: Downloaded newer image for node:latest
+docker .io/library/node:latest
+[node2] (local) root@192.168.0.17 ~
+
+------------------------------------------------------
+
+https://github.com/dotnet/dotnet-docker
+
+docker run --rm mcr.microsoft.com/dotnet/samples
+
+docker run -d -it --rm -p 8000:80 --name aspnetcore_sample mcr.microsoft.com/dotnet/samples:aspnetapp
+
+docker run -d --rm -it -p 8000:80 falbarn/gsd:aspnetapp
+
+docker image  rm mcr.microsoft.com/dotnet/samples:aspnetapp
+
+docker build -t falbarn/gsd:aspnetapp .
+
+docker image push falbarn/gsd:aspnetapp
+
+git remote add origin1 https://github.com/fallbarn//dotnet-docker
+
+// push to up-stream origin the master branch only
+git push -u origin1 master
+
+// push everything
+git push  https://github.com/fallbarn//dotnet-docker
+
+
+git clone https://github.com/fallbarn//dotnet-docker
+
+cd dotnet-docker/
+
+git checkout origin/master
+
+docker run --rm -v ${pwd}/TestResults:/source/tests/TestResults falbarn/gsd:complexapp
+
+
+
+
+
+
+

@@ -1,4 +1,11 @@
-git close https://github.com/fallbarn/gsd
+sle note : I have an account on hub.docker.com. Profile: falbarn 
+I have pushed an image called gsd:first-ctr
+
+// This pulls down from GIT a directory containing the files that will constitute a website running in a linux environment. 
+// but also a number of file (Docker files) that build said envirnment in the image.
+git clone https://github.com/fallbarn/gsd
+
+git pull https://github.com/fallbarn/gsd
 
 cd gsd
 ls -l
@@ -6,8 +13,6 @@ cd first-container
 ls -l
 clear
 docker image build -t falbarn/gsd:first-ctr .
-
-
 
 
 // dockerId: falbarn
@@ -27,7 +32,10 @@ docker image push falbarn/gsd:first-ctr
 docker image rm falbarn/gsd:first-ctr
 
 docker container run -d --name web -p 8000:8080  \ // worked first time !  -d mean detached from terminal  local port 8000 is mapped to 8080 as specified in app.js
-falbarn/gsd:first-ctr
+
+docker run -d -p 8000:80 falbarn/gsd:aspnetapp
+docker run -d --name web -p 8000:80 falbarn/gsd:aspnetapp
+docker attach topdemo
 
 docker container ls
 
@@ -41,7 +49,11 @@ docker container start web
 
 docker container rm web
 
+source/tests/tests.csproj : error NU3028: Package 'Microsoft.NET.Test.Sdk 16.3.0' from source 'https://api.nuget.org/v3/index.json': 
+The author primary signature's timestamp found a chain building issue: UntrustedRoot: self signed certificate in certificate chain
+/source/tests/tests.csproj : error NU3037: Package 'Microsoft.NET.Test.Sdk 16.3.0' from source 'https://api.nuget.org/v3/index.json': 
 
+The author primary signature validity period has expired.
 
 
 
