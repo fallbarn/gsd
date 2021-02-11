@@ -215,8 +215,65 @@ git checkout origin/master
 
 docker run --rm -v ${pwd}/TestResults:/source/tests/TestResults falbarn/gsd:complexapp
 
+======================================================================================
+
+Plural site docker for web developers
+-------------------------------------
+
+//1. Get the dotnet core website from git
+git clone https://github.com/fallbarn//dotnet-docker
+
+// 2. nav to branch
+git checkout master
+
+// 3. pull done the dotnet image
+docker pull mcr.microsoft.com/dotnet/sdk:5.0-alpine
 
 
+// 4. Go to directory container the dotnet core project
+/root/dotnet-docker/samples/aspnetapp/aspnetapp
+
+// 5. Must set to run on any IP address (remove https - avoid cert issues)
+vim launchSettings.json;  "applicationUrl": "http://+:5000",
+
+
+// 7. run the image in a container, -v point the /app folder in the container back to outside, run up an borne shell in container
+//    note: must be in the correct directory !!!; -p 
+// map external port 8080 on to container port 5000
+// -v Bind mount a volue here it our 'local dir' to '/app' 
+// -w set working dir
+docker run -d -it -p  8080:5000 -v $(pwd):/app -w "/app" mcr.microsoft.com/dotnet/sdk:5.0-alpine /bin/sh
+docker attach --sig-proxy=false <dockerId>
+Ctrl+p + Ctrl+q to quit
+
+// 8. Should get the following prompt. ls -l will show the dotnet core file from the outer operating system
+
+ /app # 
+
+// 9. You can then use the dotnet cli to build the Core project 
+dotnet build
+
+// 10. To run detached.
+nohup dotnet run > dotnetcore.log 
+
+
+docker run -d -it -p  8080:5000 -v var/www -w "/app" mcr.microsoft.com/dotnet/sdk:5.0-alpine /bin/sh
+
+-----------------------------------
+Docker file
+------------------------------------
+
+FROM  <IMAGE>
+LABEL <COMMENT>
+RUN <EX
+COPY < . /var/www> // everything into var/www 
+WORKDIR <CURRENT DIR>
+ENV < XXXX=YYYY>
+VOLUMN< SAME AS-V OPTION> creates a perminent directory (volumn)
+ENTRYPOINT < INVOKE >
+WORKDIR < CONNECT WHERE TO RUN ENTRYPOINT>
+EXPOSE < ports>
+ENV <
 
 
 

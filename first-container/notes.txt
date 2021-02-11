@@ -7,7 +7,7 @@ git clone https://github.com/fallbarn/gsd
 
 git pull https://github.com/fallbarn/gsd
 
-cd gsd
+cd gsdgs
 ls -l
 cd first-container
 ls -l
@@ -43,7 +43,7 @@ docker container ls
 
 docker container stop web
 
-docker container ls -a
+docker
 
 docker container start web
 
